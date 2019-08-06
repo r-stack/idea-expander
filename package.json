@@ -1,0 +1,22 @@
+{
+  "name": "idea-expander",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r-stack/idea-expander.git"
+  },
+  "author": "party-b",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r-stack/idea-expander/issues"
+  },
+  "homepage": "https://github.com/r-stack/idea-expander#readme",
+  "dependencies": {
+    "firebase": "^6.3.4"
+  }
+}
