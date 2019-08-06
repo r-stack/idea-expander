@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { auth, db } from './../firebase';
+import { auth, db } from '@/firebase';
 
 const usersRef = db.ref('users');
 
