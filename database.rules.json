@@ -9,8 +9,11 @@
         "name": {
           ".validate": "newData.isString() && newData.val().length <= 63"
         },
-        "admin": {
-          ".validate": "newData.isBoolean()"
+        "room": {
+          ".validate": "newData.isString() && newData.val().length <= 63"
+        },
+        "score": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
         }
       }
     },

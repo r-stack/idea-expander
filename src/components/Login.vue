@@ -14,11 +14,15 @@
                   <input class="input is-large" type="text" placeholder="Your Name" autofocus=""
                          v-model="username" />
                 </div>
+                <div class="control">
+                  <input class="input is-large" type="text" placeholder="Room Name"
+                         v-model="roomname" />
+                </div>
               </div>
               <button class="button is-block is-info is-large is-fullwidth"
-                      @click="login(username)"
-                      :disabled="!username || username.length > 63 || isClicked">
-                      Login
+                      @click="login(username, roomname)"
+                      :disabled="!username || username.length > 63 || !roomname || roomname.length > 63 || isClicked">
+                      ログイン&入室
               </button>
             </form>
           </div>
@@ -39,11 +43,12 @@ export default {
     const username = auth.currentUser ? auth.currentUser.displayName : '';
     return {
       username,
+      roomname: '',
       isClicked: false,
     };
   },
   methods: {
-    login(username) {
+    login(username, roomname) {
       this.isClicked = true;
       // TODO: if username.length > 63, show error message
       auth.signInAnonymously()
@@ -51,6 +56,8 @@ export default {
           console.log(res);
           return usersRef.child(res.user.uid).set({
             name: username,
+            room: roomname,
+            score: 0
           });
         })
         .then(() => {
@@ -61,7 +68,12 @@ export default {
         })
         .then(() => {
           console.log(3);
-          this.$router.push('/room');
+          this.$router.push({
+            name: 'PlayRoom',
+            params: {
+              roomname: roomname
+            }
+          });
         })
         .catch((e) => {
           console.error(e);

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
 import PlayRoom from '@/components/PlayRoom'
+import Card from '@/components/Card'
 import Result from '@/components/Result'
 
 Vue.use(Router)
@@ -15,7 +16,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/room/:roomName',
+      path: '/room/:roomname',
       name: 'PlayRoom',
       component: PlayRoom
     }

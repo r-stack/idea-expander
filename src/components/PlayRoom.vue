@@ -1,113 +1,131 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-  </div>
+  <section id="playroom" class="columns is-multiline">
+    <div class="column is-one-quarter-desktop is-half-tablet">
+      <Card
+        v-for="(card, key) in cards"
+        :key="key"
+        :pkey="key"
+        :card="card"
+        :cardsRef="cardsRef"
+        :uid="user['.key']"
+      />
+    </div>
+    <nav class="navbar is-fixed-bottom">
+      <div class="field">
+        <div class="control">
+          <input class="input is-large" type="text" placeholder="Create new idea card" autofocus=""
+                  v-model="newCardname" />
+        </div>
+      </div>
+      <button class="button is-block is-info is-large is-fullwidth"
+              @click="createCard(newCardname)"
+              >
+              作成
+      </button>
+    </nav>
+  </section>
 </template>
 
 <script>
+import {db, auth} from '@/firebase';
+import Card from './Card'
+
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: 'PlayRoom',
+  components: {
+    Card
+  },
+  data() {
+    console.log(auth, db);
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+      cards: undefined,
+      newCardname: ''
+    };
+  },
+  created() {
+    console.log('playroom: created');
+    // const cardsRef = db.ref('cards');
+    this.createdPromise = new Promise(async (resolve, reject) => {
+      console.log('playroom: bind userRef');
+      this.userRef = db.ref(`users/${auth.currentUser.uid}`);
+      await this.$rtdbBind('user', this.userRef);
+      console.log('user:', this.user);
+      console.log('playroom: bind cardsRef');
+      this.cardsRef = db.ref(`cards/${this.user.room}`);
+      await this.$rtdbBind('cards', this.cardsRef);
+      console.log('cards:', this.cards);
+      resolve();
+    });
+  },
+  mounted() {
+    this.createdPromise
+      .then(() => {
+        console.log('playroom: mounted');
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  },
+  methods: {
+    createCard(newCardname) {
+      this.cardsRef.push({
+        creator: this.user['.key'],
+        name: newCardname,
+        mentionCount: 0,
+        players: {
+          [this.user['.key']]: true
+        }
+      })
+      .then(() => {
+        this.newCardname = '';
+        console.log('cards', this.cards);
+      })
+      .catch(e => {
+        console.error(e);
+      });
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+html,body {
+  font-family: 'Open Sans', serif;
+  font-size: 14px;
+  font-weight: 300;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.hero.is-success {
+  background: #F2F6FA;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.hero .nav, .hero.is-success .nav {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
-a {
-  color: #42b983;
+.box {
+  margin-top: 5rem;
+}
+.avatar {
+  margin-top: -70px;
+  padding-bottom: 20px;
+}
+.avatar img {
+  padding: 5px;
+  width: 128px;
+  background: #fff;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+}
+input {
+  font-weight: 300;
+}
+p {
+  font-weight: 700;
+}
+p.subtitle {
+  padding-top: 1rem;
 }
 </style>
+
+
