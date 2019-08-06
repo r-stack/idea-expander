@@ -1,113 +1,110 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-  </div>
+  <section id="count" class="hero is-success is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h3 class="title has-text-grey">スコアランキング</h3>
+        <div class="column is-4 is-offset-4">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+              <tr v-for="(user, index) in rankedUsers" :key="index">
+                <td>{{index + 1}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.score}}</td>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
+// import _ from 'underscore';
+import { auth, db } from '@/firebase';
+
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: 'Result',
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+      users: [],
+    };
+  },
+  created() {
+    console.log('result: created');
+    this.createdPromise = new Promise(async (resolve, reject) => {
+      console.log('result: bind userRef');
+      this.userRef = db.ref(`users/${auth.currentUser.uid}`);
+      await this.$rtdbBind('user', this.userRef);
+      console.log('user:', this.user);
+      console.log('result: bind cardsRef');
+      this.usersRef = db.ref('users').orderByChild('room').equalTo(this.user.room);
+      await this.$rtdbBind('users', this.usersRef);
+      console.log('users:', this.users);
+      resolve();
+    });
+  },
+  mounted() {
+    this.createdPromise
+      .then(() => {
+        console.log('ok');
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  },
+  computed: {
+    // スコア降順でソートしたユーザリスト
+    rankedUsers() {
+      return this.users.sort((a, b) => {
+        return b.score - a.score
+      })
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+html,body {
+  font-family: 'Open Sans', serif;
+  font-size: 14px;
+  font-weight: 300;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.hero.is-success {
+  background: #F2F6FA;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.hero .nav, .hero.is-success .nav {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
-a {
-  color: #42b983;
+.box {
+  margin-top: 5rem;
+}
+.avatar {
+  margin-top: -70px;
+  padding-bottom: 20px;
+}
+.avatar img {
+  padding: 5px;
+  background: #fff;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+}
+input {
+  font-weight: 300;
+}
+p {
+  font-weight: 700;
+}
+p.subtitle {
+  padding-top: 1rem;
 }
 </style>
+

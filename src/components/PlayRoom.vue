@@ -22,6 +22,10 @@
               >
               作成
       </button>
+      <button class="button is-block is-info is-large"
+              @click="result()">
+              終了
+      </button>
     </nav>
   </section>
 </template>
@@ -44,7 +48,6 @@ export default {
   },
   created() {
     console.log('playroom: created');
-    // const cardsRef = db.ref('cards');
     this.createdPromise = new Promise(async (resolve, reject) => {
       console.log('playroom: bind userRef');
       this.userRef = db.ref(`users/${auth.currentUser.uid}`);
@@ -88,6 +91,11 @@ export default {
         return score + 10;
       })
     },
+    result() {
+      this.$router.push({
+        name: 'Result'
+      });
+    }
   },
 };
 </script>

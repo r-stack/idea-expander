@@ -19,6 +19,11 @@ export default new Router({
       path: '/room/:roomname',
       name: 'PlayRoom',
       component: PlayRoom
-    }
+    },
+    {
+      path: '/result',
+      name: 'Result',
+      component: Result
+    },
   ]
 })
