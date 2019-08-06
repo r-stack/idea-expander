@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/r-stack/idea-expander#readme",
   "dependencies": {
-    "firebase": "^6.3.4"
+    "firebase": "^6.3.4",
+    "vue": "^2.6.10",
+    "vuefire": "^2.1.2"
   }
 }
