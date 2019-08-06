@@ -23,6 +23,10 @@
               作成
       </button>
       <button class="button is-block is-info is-large"
+              @click="record()">
+              音声
+      </button>
+      <button class="button is-block is-info is-large"
               @click="result()">
               終了
       </button>
@@ -33,6 +37,8 @@
 <script>
 import {db, auth} from '@/firebase';
 import Card from './Card'
+
+const recognition = new webkitSpeechRecognition();
 
 export default {
   name: 'PlayRoom',
@@ -90,6 +96,14 @@ export default {
       this.userRef.child('score').transaction(score => {
         return score + 10;
       })
+    },
+    record() {
+      recognition.onresult = event => {
+        if (event.results.length > 0) {
+          this.newCardname = event.results[0][0].transcript;
+        };
+      };
+      recognition.start();
     },
     result() {
       this.$router.push({
