@@ -3,6 +3,11 @@
 ## Build Setup
 
 ```
+# このプロジェクトのディレクトリに移動
+cd idea-expander
+```
+
+```
 npm install -g firebase-tools
 
 firebase login
