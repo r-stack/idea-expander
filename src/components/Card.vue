@@ -2,6 +2,7 @@
   <div class="idea-card card">
     <div class="card-content" @click="play(card)">
       <p class="title">{{ card.name }}</p>
+      <p class="subtitle">{{ isPlayed ? 'プレイ済み' : '' }}</p>
     </div>
   </div>
 </template>
@@ -25,14 +26,30 @@ export default {
       type: String
     }
   },
+  data() {
+    const isPlayed = this.card.players[this.uid] ? true : false;
+    return {
+      isPlayed
+    }
+  },
   methods: {
+    // ほかの人が作ったカードをプレイ
     play(card) {
       console.log('uid', this.uid);
       console.log('card', this.card);
       console.log('key', this.pkey);
       console.log('cardsRef', this.cardsRef);
-      console.log('cardRef', this.cardsRef.child(this.pkey));
-      this.cardsRef.child(`${this.pkey}/players/${this.uid}`).set(true);
+      const cardRef = this.cardsRef.child(this.pkey);
+      // 自分をプレイ済みにする
+      cardRef.child(`players/${this.uid}`).set(true);
+      // 参照数を上げる
+      cardRef.child(`mentionCount`).transaction(mentionCount => {
+        return mentionCount + 1;
+      })
+      .catch(e => {
+        console.error(e);
+      });
+      this.isPlayed = true;
     }
   },
 };
