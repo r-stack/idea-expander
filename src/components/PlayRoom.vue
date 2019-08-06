@@ -11,15 +11,10 @@
       />
     </div>
     <nav class="navbar is-fixed-bottom">
-      <div class="field">
-        <div class="control">
-          <input class="input is-large" type="text" placeholder="Create new idea card" autofocus=""
-                  v-model="newCardname" />
-        </div>
-      </div>
-      <button class="button is-block is-info is-large is-fullwidth"
-              @click="createCard(newCardname)"
-              >
+      <input class="input is-large is-fullwidth" type="text" placeholder="Create new idea card" autofocus=""
+              v-model="newCardname" />
+      <button class="button is-block is-info is-large"
+              @click="createCard(newCardname)">
               作成
       </button>
       <button class="button is-block is-info is-large"
