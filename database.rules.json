@@ -3,9 +3,10 @@
   "rules": {
     "users": {
       ".read": true,
+      ".indexOn": "room",
       "$user": {
-        ".read": "$user == auth.uid",
-        ".write": "$user != null",
+        ".read": "auth != null",
+        ".write": "auth != null",
         "name": {
           ".validate": "newData.isString() && newData.val().length <= 63"
         },
@@ -14,20 +15,6 @@
         },
         "score": {
           ".validate": "newData.isNumber() && newData.val() >= 0"
-        }
-      }
-    },
-    "rooms": {
-      ".read": "auth != null",
-      ".write": "auth != null",
-      "$room": {
-        "name": {
-          ".validate": "newData.isString() && newData.val().length <= 63"
-        },
-        "members": {
-          "$member": {
-            ".validate": "newData.isBoolean()"
-          }
         }
       }
     },
