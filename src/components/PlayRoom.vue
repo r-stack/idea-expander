@@ -83,6 +83,10 @@ export default {
       .catch(e => {
         console.error(e);
       });
+      // スコア更新
+      this.userRef.child('score').transaction(score => {
+        return score + 10;
+      })
     },
   },
 };

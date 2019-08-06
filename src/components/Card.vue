@@ -43,12 +43,28 @@ export default {
       // 自分をプレイ済みにする
       cardRef.child(`players/${this.uid}`).set(true);
       // 参照数を上げる
-      cardRef.child(`mentionCount`).transaction(mentionCount => {
+      cardRef.child('mentionCount').transaction(mentionCount => {
         return mentionCount + 1;
       })
       .catch(e => {
         console.error(e);
       });
+      // 自分のスコアを更新
+      db.ref(`users/${this.uid}/score`).transaction(score => {
+        return score + 5;
+      })
+      .catch(e => {
+        console.error(e);
+      });
+      // 参照された人のスコアを更新
+      console.log('creator', this.card.creator);
+      db.ref(`users/${this.card.creator}/score`).transaction(score => {
+        return score + 5;
+      })
+      .catch(e => {
+        console.error(e);
+      });
+
       this.isPlayed = true;
     }
   },

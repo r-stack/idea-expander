@@ -5,7 +5,7 @@
       ".read": true,
       "$user": {
         ".read": "$user == auth.uid || root.child('users').child(auth.uid).child('admin').val() == true",
-        ".write": "$user == auth.uid",
+        ".write": "$user != null",
         "name": {
           ".validate": "newData.isString() && newData.val().length <= 63"
         },
