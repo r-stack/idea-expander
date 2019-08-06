@@ -12,7 +12,7 @@
     </div>
     <nav class="navbar is-fixed-bottom">
       <input class="input is-large is-fullwidth" type="text" placeholder="Create new idea card" autofocus=""
-              v-model="newCardname" />
+              v-model="newCardname" v-on:keyup.enter="createCard(newCardname)" />
       <button class="button is-block is-info is-large"
               @click="createCard(newCardname)">
               作成
