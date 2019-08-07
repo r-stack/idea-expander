@@ -1,6 +1,15 @@
 <template>
   <section id="playroom" class="columns is-multiline">
-    <div class="column is-one-quarter-desktop is-half-tablet">
+    <nav class="navbar is-fixed-top">
+      <div class="is-large is-fullwidth">
+        <span class="title">ルーム名</span>
+        <span class="title">カード総数</span>
+        <span class="title">バッジ1</span>
+        <span class="title">バッジ2</span>
+        <span class="title">バッジ2</span>
+      </div>
+    </nav>
+    <div class="columns is-multiline is-mobile">
       <Card
         v-for="(card, key) in cards"
         :key="key"
@@ -25,6 +34,7 @@
               @click="result()">
               終了
       </button>
+      </div>
     </nav>
   </section>
 </template>

@@ -1,10 +1,12 @@
 <template>
-  <div class="idea-card card">
+<div class="column is-3">
+  <div class="card">
     <div class="card-content" @click="play(card)">
       <p class="title">{{ card.name }}</p>
       <p class="subtitle">{{ isPlayed ? 'プレイ済み' : '' }}</p>
     </div>
   </div>
+</div>
 </template>
 
 <script>
