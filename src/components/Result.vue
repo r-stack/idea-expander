@@ -13,7 +13,7 @@
             <span>ン</span>
             <span>グ</span>
         </div>
-        <div class="column is-4 is-offset-4">
+        <div class="column">
           <div class="table-container">
             <table class="table is-striped is-hoverable is-fullwidth">
               <thead style="background-color: #42afe3;">
@@ -57,7 +57,8 @@
           </div>
         </div>
       </div>
-    </div><!-- hero body -->
+    </div> 
+    <!-- ////*hero body*/ -->
   </section>
 </template>
 
@@ -115,10 +116,11 @@ html,body {
   font-family: 'Open Sans', serif;
   font-size: 14px;
   font-weight: 300;
-  background-color: #1D6A96;
+  background-color: #85B8CB;
 }
 .hero.is-success {
-  background: #F2F6FA;
+  /* background-color: #D1DDDB; */
+  background-color: #85B8CB;
 }
 .hero .nav, .hero.is-success .nav {
   -webkit-box-shadow: none;
@@ -164,7 +166,7 @@ p.subtitle {
   display: inline-block;
   margin: 0 -.05em;
   animation: loading .8s infinite;
-  color: #283B42
+  color: #D1DDDB;
 }
 .loading span:nth-child(2) {
   animation-delay: .1s;
