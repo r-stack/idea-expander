@@ -11,6 +11,7 @@
                   <th style="text-align:center">Rank</th>
                   <th style="text-align:center">Name</th>
                   <th style="text-align:center">Score</th>
+                  <th style="text-align:center">Badge</th>
                 </tr>
               </thead>
               <tbody>              
@@ -18,6 +19,28 @@
                   <td class="rank-elem">{{index + 1}}</td>
                   <td class="name-elem">{{user.name}}</td>
                   <td class="score-elem">{{user.score}}</td>
+                  <td class="badge-elem">
+                    <img src="./../assets/card_create3_25.png"
+                    v-if="user.badges.createBadge >= 10 & user.badges.createBadge < 20" />
+                    <img src="./../assets/card_create2_25.png"
+                    v-else-if="user.badges.createBadge >= 20 & user.badges.createBadge < 30" />
+                    <img src="./../assets/card_create1_25.png"
+                    v-else-if="user.badges.createBadge >= 30" />
+
+                    <img src="./../assets/combo3_25.png"
+                    v-if="user.badges.mentionBadge >= 10 & user.badges.mentionBadge < 20" />
+                    <img src="./../assets/combo2_25.png"
+                    v-else-if="user.badges.mentionBadge >= 20 & user.badges.mentionBadge < 30" />
+                    <img src="./../assets/combo1_25.png"
+                    v-else-if="user.badges.mentionBadge >= 30" />
+
+                    <img src="./../assets/favorite3_25.png"
+                    v-if="user.badges.favBadge >= 10 & user.badges.favBadge < 20" />
+                    <img src="./../assets/favorite2_25.png"
+                    v-else-if="user.badges.favBadge >= 20 & user.badges.favBadge < 30" />
+                    <img src="./../assets/favorite1_25.png"
+                    v-else-if="user.badges.favBadge >= 30" />
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -75,6 +98,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.badge-elem {
+  white-space: nowrap;
+}
 html,body {
   font-family: 'Open Sans', serif;
   font-size: 14px;
