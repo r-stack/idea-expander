@@ -56,7 +56,7 @@
       </button>
       <button class="button is-block is-info is-large"
               @click="record()">
-              音声
+              🎤
       </button>
       <button class="button is-block is-info is-large"
               @click="result()">
