@@ -4,7 +4,7 @@
     <div class="card-content">
       <p class="title"><a @click="play(card)">{{ card.name }}</a></p>
       <span class="is-pulled-left">{{ isPlayed ? 'プレイ済み' : '' }}</span>
-      <a class="is-pulled-right" @click="favorite(card)">💛{{ card.favCount }}</a>
+      <a class="is-pulled-right" @click="favorite(card)">💖{{ card.favCount }}</a>
     </div>
   </div>
 </div>
