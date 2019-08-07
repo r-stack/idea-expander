@@ -15,6 +15,17 @@
         },
         "score": {
           ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "badges": {
+          "creatBadge": {
+            ".validate": "newData.isNumber() && newData.val() >= 0"
+          },
+          "mentionBadge": {
+            ".validate": "newData.isNumber() && newData.val() >= 0"
+          },
+          "favBadge": {
+            ".validate": "newData.isNumber() && newData.val() >= 0"
+          }
         }
       }
     },
@@ -35,6 +46,9 @@
             ".validate": "newData.isString() && newData.val().length <= 63"
           },
           "mentionCount": {
+            ".validate": "newData.isNumber() && newData.val() >= 0"
+          },
+          "favCount": {
             ".validate": "newData.isNumber() && newData.val() >= 0"
           }
         }
