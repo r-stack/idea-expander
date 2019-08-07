@@ -36,7 +36,8 @@
         </div>
       </div>
     </nav>
-    <div class="columns is-multiline is-mobile">
+    
+    <div class="columns is-multiline is-mobile cards">
       <Card
         v-for="(card, key) in cards"
         :key="key"
@@ -68,9 +69,7 @@
 <script>
 import {db, auth} from '@/firebase';
 import Card from './Card'
-
 const recognition = new webkitSpeechRecognition();
-
 export default {
   name: 'PlayRoom',
   components: {
@@ -188,6 +187,7 @@ p {
 p.subtitle {
   padding-top: 1rem;
 }
+.cards{
+  width: 100% !important;
+}
 </style>
-
-

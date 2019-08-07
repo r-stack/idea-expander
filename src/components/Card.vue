@@ -12,7 +12,6 @@
 
 <script>
 import { auth, db } from '@/firebase';
-
 export default {
   name: 'Card',
   props: {
@@ -73,7 +72,6 @@ export default {
       .catch(e => {
         console.error(e);
       });
-
       this.isPlayed = true;
     },
     favorite(card) {
@@ -89,7 +87,6 @@ export default {
       .catch(e => {
         console.error(e);
       });
-
     }
   },
 };
@@ -133,6 +130,8 @@ p {
 p.subtitle {
   padding-top: 1rem;
 }
+
+.card{
+ background-color: #85B8CB
+}
 </style>
-
-
