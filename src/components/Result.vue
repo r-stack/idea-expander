@@ -2,11 +2,21 @@
   <section id="count" class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <h3 class="title has-text-grey">スコアランキング</h3>
-        <div class="column is-4 is-offset-4">
+        <!-- <h3 class="title has-text-grey">スコアランキング</h3> -->
+        <div class="title loading">
+            <span>ス</span>
+            <span>コ</span>
+            <span>ア</span>
+            <span>ラ</span>
+            <span>ン</span>
+            <span>キ</span>
+            <span>ン</span>
+            <span>グ</span>
+        </div>
+        <div class="column">
           <div class="table-container">
-            <table class="table is-striped is-hoverable is-scrollable is-fullwidth">
-              <thead style="background-color: #42afe3;">
+            <table class="table is-striped is-hoverable is-fullwidth">
+              <thead style="background-color: #D1DDDB;">
                 <tr>
                   <th style="text-align:center">Rank</th>
                   <th style="text-align:center">Name</th>
@@ -47,7 +57,8 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> 
+    <!-- ////*hero body*/ -->
   </section>
 </template>
 
@@ -105,9 +116,12 @@ html,body {
   font-family: 'Open Sans', serif;
   font-size: 14px;
   font-weight: 300;
+  /* background-color: #D1DDDB; */
+  background-color: #85B8CB;
 }
 .hero.is-success {
-  background: #F2F6FA;
+  /* background-color: #D1DDDB; */
+  background-color: #85B8CB;
 }
 .hero .nav, .hero.is-success .nav {
   -webkit-box-shadow: none;
@@ -145,5 +159,45 @@ p.subtitle {
 .score-elem{
     text-align:center;
 }
+
+
+
+
+.loading span {
+  display: inline-block;
+  margin: 0 -.05em;
+  animation: loading .8s infinite;
+  color: #283B42;
+}
+.loading span:nth-child(2) {
+  animation-delay: .1s;
+}
+.loading span:nth-child(3) {
+  animation-delay: .2s;
+}
+.loading span:nth-child(4) {
+  animation-delay: .3s;
+}
+.loading span:nth-child(5) {
+  animation-delay: .4s;
+}
+.loading span:nth-child(6) {
+  animation-delay: .5s;
+}
+.loading span:nth-child(7) {
+  animation-delay: .6s;
+}
+.loading span:nth-child(8) {
+  animation-delay: .7s;
+}
+@keyframes loading {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+}
+
 </style>
 
