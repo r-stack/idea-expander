@@ -34,7 +34,6 @@
               @click="result()">
               終了
       </button>
-      </div>
     </nav>
   </section>
 </template>
