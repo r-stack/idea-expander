@@ -67,6 +67,12 @@ export default {
       .catch(e => {
         console.error(e);
       });
+      db.ref(`users/${this.card.creator}/badges/mentionBadge`).transaction(mentionBadge => {
+        return mentionBadge + 1;
+      })
+      .catch(e => {
+        console.error(e);
+      });
 
       this.isPlayed = true;
     },
@@ -76,6 +82,14 @@ export default {
       cardRef.child('favCount').transaction(favCount => {
         return favCount + 1;
       });
+      // いいねされた人のいいねバッジスコア加算
+      db.ref(`users/${this.card.creator}/badges/favBadge`).transaction(favBadge => {
+        return favBadge + 1;
+      })
+      .catch(e => {
+        console.error(e);
+      });
+
     }
   },
 };

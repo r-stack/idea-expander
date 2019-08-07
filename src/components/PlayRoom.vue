@@ -2,19 +2,43 @@
   <section id="playroom" class="columns is-multiline">
     <nav class="navbar is-fixed-top">
       <div class="navbar-item">
-        <span class="title">テーマ: {{ user.room }}</span>
+        <span class="title">テーマ: {{ user ? user.room : '' }}</span>
       </div>
       <div class="navbar-item">
-        <span class="title">カード総数: {{ Object.keys(cards).length }}</span>
+        <span class="title">カード総数: {{ cards ? Object.keys(cards).length : '' }}</span>
       </div>
       <div class="navbar-item">
-        📛
+        <span v-if="user.badges.createBadge >= 10 & user.badges.createBadge < 20">
+        📛1
+        </span>
+        <span v-else-if="user.badges.createBadge >= 20 & user.badges.createBadge < 30">
+        📛2
+        </span>
+        <span v-else-if="user.badges.createBadge >= 30">
+        📛3
+        </span>
       </div>
       <div class="navbar-item">
-        📛
+        <span v-if="user.badges.mentionBadge >= 10 & user.badges.mentionBadge < 20">
+        📛1
+        </span>
+        <span v-else-if="user.badges.mentionBadge >= 20 & user.badges.mentionBadge < 30">
+        📛2
+        </span>
+        <span v-else-if="user.badges.mentionBadge >= 30">
+        📛3
+        </span>
       </div>
       <div class="navbar-item">
-        📛
+        <span v-if="user.badges.favBadge >= 10 & user.badges.favBadge < 20">
+        📛1
+        </span>
+        <span v-else-if="user.badges.favBadge >= 20 & user.badges.favBadge < 30">
+        📛2
+        </span>
+        <span v-else-if="user.badges.favBadge >= 30">
+        📛3
+        </span>
       </div>
     </nav>
     <div class="columns is-multiline is-mobile">
@@ -108,6 +132,10 @@ export default {
       // スコア更新
       this.userRef.child('score').transaction(score => {
         return score + 10;
+      })
+      // カード作成バッジスコア加算
+      this.userRef.child('badges/createBadge').transaction(createBadge => {
+        return createBadge + 1;
       })
     },
     record() {
