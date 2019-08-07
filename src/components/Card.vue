@@ -1,9 +1,10 @@
 <template>
 <div class="column is-3">
   <div class="card">
-    <div class="card-content" @click="play(card)">
-      <p class="title">{{ card.name }}</p>
-      <p class="subtitle">{{ isPlayed ? 'プレイ済み' : '' }}</p>
+    <div class="card-content">
+      <p class="title"><a @click="play(card)">{{ card.name }}</a></p>
+      <span class="is-pulled-left">{{ isPlayed ? 'プレイ済み' : '' }}</span>
+      <a class="is-pulled-right" @click="favorite(card)">💖{{ card.favCount }}</a>
     </div>
   </div>
 </div>
@@ -68,6 +69,13 @@ export default {
       });
 
       this.isPlayed = true;
+    },
+    favorite(card) {
+      const cardRef = this.cardsRef.child(this.pkey);
+      // いいね加算
+      cardRef.child('favCount').transaction(favCount => {
+        return favCount + 1;
+      });
     }
   },
 };
