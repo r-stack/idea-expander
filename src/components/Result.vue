@@ -16,7 +16,7 @@
         <div class="column">
           <div class="table-container">
             <table class="table is-striped is-hoverable is-fullwidth">
-              <thead style="background-color: #42afe3;">
+              <thead style="background-color: #D1DDDB;">
                 <tr>
                   <th style="text-align:center">Rank</th>
                   <th style="text-align:center">Name</th>
@@ -116,6 +116,7 @@ html,body {
   font-family: 'Open Sans', serif;
   font-size: 14px;
   font-weight: 300;
+  /* background-color: #D1DDDB; */
   background-color: #85B8CB;
 }
 .hero.is-success {
@@ -166,7 +167,7 @@ p.subtitle {
   display: inline-block;
   margin: 0 -.05em;
   animation: loading .8s infinite;
-  color: #D1DDDB;
+  color: #283B42;
 }
 .loading span:nth-child(2) {
   animation-delay: .1s;
