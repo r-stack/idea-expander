@@ -4,20 +4,24 @@
       <div class="container has-text-centered">
         <h3 class="title has-text-grey">スコアランキング</h3>
         <div class="column is-4 is-offset-4">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Score</th>
-              </tr>
-              <tr v-for="(user, index) in rankedUsers" :key="index">
-                <td>{{index + 1}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.score}}</td>
-              </tr>
-            </thead>
-          </table>
+          <div class="table-container">
+            <table class="table is-striped is-hoverable is-scrollable is-fullwidth">
+              <thead style="background-color: #42afe3;">
+                <tr>
+                  <th style="text-align:center">Rank</th>
+                  <th style="text-align:center">Name</th>
+                  <th style="text-align:center">Score</th>
+                </tr>
+              </thead>
+              <tbody>              
+                <tr v-for="(user, index) in rankedUsers" :key="index">
+                  <td class="rank-elem">{{index + 1}}</td>
+                  <td class="name-elem">{{user.name}}</td>
+                  <td class="score-elem">{{user.score}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -105,6 +109,15 @@ p {
 }
 p.subtitle {
   padding-top: 1rem;
+}
+.rank-elem{
+    text-align:center;
+}
+.name-elem{
+    text-align:center;
+}
+.score-elem{
+    text-align:center;
 }
 </style>
 
