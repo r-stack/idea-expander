@@ -93,6 +93,7 @@ export default {
         creator: this.user['.key'],
         name: newCardname,
         mentionCount: 0,
+        favCount: 0,
         players: {
           [this.user['.key']]: true
         }

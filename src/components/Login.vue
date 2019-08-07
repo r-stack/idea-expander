@@ -57,7 +57,12 @@ export default {
           return usersRef.child(res.user.uid).set({
             name: username,
             room: roomname,
-            score: 0
+            score: 0,
+            badges: {
+              createBadge: 0,
+              mentionBadge: 0,
+              favBadge: 0
+            }
           });
         })
         .then(() => {
