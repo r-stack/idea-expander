@@ -8,37 +8,28 @@
         <span class="title">カード総数: {{ cards ? Object.keys(cards).length : '' }}</span>
       </div>
       <div class="navbar-item">
-        <span v-if="user.badges.createBadge >= 10 & user.badges.createBadge < 20">
-        📛1
-        </span>
-        <span v-else-if="user.badges.createBadge >= 20 & user.badges.createBadge < 30">
-        📛2
-        </span>
-        <span v-else-if="user.badges.createBadge >= 30">
-        📛3
-        </span>
+        <img src="./../assets/card_create3_25.png"
+         v-if="user.badges.createBadge >= 10 & user.badges.createBadge < 20" />
+        <img src="./../assets/card_create2_25.png"
+         v-else-if="user.badges.createBadge >= 20 & user.badges.createBadge < 30" />
+        <img src="./../assets/card_create1_25.png"
+         v-else-if="user.badges.createBadge >= 30" />
       </div>
       <div class="navbar-item">
-        <span v-if="user.badges.mentionBadge >= 10 & user.badges.mentionBadge < 20">
-        📛1
-        </span>
-        <span v-else-if="user.badges.mentionBadge >= 20 & user.badges.mentionBadge < 30">
-        📛2
-        </span>
-        <span v-else-if="user.badges.mentionBadge >= 30">
-        📛3
-        </span>
+        <img src="./../assets/combo3_25.png"
+         v-if="user.badges.mentionBadge >= 10 & user.badges.mentionBadge < 20" />
+        <img src="./../assets/combo2_25.png"
+         v-else-if="user.badges.mentionBadge >= 20 & user.badges.mentionBadge < 30" />
+        <img src="./../assets/combo1_25.png"
+         v-else-if="user.badges.mentionBadge >= 30" />
       </div>
       <div class="navbar-item">
-        <span v-if="user.badges.favBadge >= 10 & user.badges.favBadge < 20">
-        📛1
-        </span>
-        <span v-else-if="user.badges.favBadge >= 20 & user.badges.favBadge < 30">
-        📛2
-        </span>
-        <span v-else-if="user.badges.favBadge >= 30">
-        📛3
-        </span>
+        <img src="./../assets/favorite3_25.png"
+         v-if="user.badges.favBadge >= 10 & user.badges.favBadge < 20" />
+        <img src="./../assets/favorite2_25.png"
+         v-else-if="user.badges.favBadge >= 20 & user.badges.favBadge < 30" />
+        <img src="./../assets/favorite1_25.png"
+         v-else-if="user.badges.favBadge >= 30" />
       </div>
     </nav>
     <div class="columns is-multiline is-mobile">
