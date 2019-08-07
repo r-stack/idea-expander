@@ -1,12 +1,20 @@
 <template>
   <section id="playroom" class="columns is-multiline">
     <nav class="navbar is-fixed-top">
-      <div class="is-large is-fullwidth">
-        <span class="title">ルーム名</span>
-        <span class="title">カード総数</span>
-        <span class="title">バッジ1</span>
-        <span class="title">バッジ2</span>
-        <span class="title">バッジ2</span>
+      <div class="navbar-item">
+        <span class="title">テーマ: {{ user.room }}</span>
+      </div>
+      <div class="navbar-item">
+        <span class="title">カード総数: {{ Object.keys(cards).length }}</span>
+      </div>
+      <div class="navbar-item">
+        📛
+      </div>
+      <div class="navbar-item">
+        📛
+      </div>
+      <div class="navbar-item">
+        📛
       </div>
     </nav>
     <div class="columns is-multiline is-mobile">
